@@ -1,0 +1,6 @@
+{
+  "name": "Danh Thắng Ký - Nền Tảng Giới Thiệu & Tùy Chỉnh Danh Lam Thắng Cảnh",
+  "description": "Nền tảng khám phá, tùy biến và chia sẻ danh lam thắng cảnh với liên kết trực tiếp, cẩm nang chi tiết và thuyết minh du lịch.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

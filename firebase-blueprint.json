@@ -1,0 +1,80 @@
+{
+  "entities": {
+    "user": {
+      "title": "User",
+      "description": "System user account with role permissions for administrative access",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of user or admin"
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "editor"],
+          "description": "Access control role"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp of account creation"
+        }
+      },
+      "required": ["id", "email", "role"]
+    },
+    "landmark": {
+      "title": "Landmark",
+      "description": "Vietnamese cultural, historical, or natural heritage landmark entry",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique slug ID of the landmark"
+        },
+        "name": {
+          "type": "string",
+          "description": "Vietnamese primary name of the landmark"
+        },
+        "title": {
+          "type": "string",
+          "description": "Poetic or descriptive title"
+        },
+        "overview": {
+          "type": "string",
+          "description": "Comprehensive editorial overview of the landmark"
+        },
+        "authorUid": {
+          "type": "string",
+          "description": "UID of the admin who created or published the record"
+        },
+        "authorEmail": {
+          "type": "string",
+          "description": "Email of the admin author"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update"
+        }
+      },
+      "required": ["id", "name", "overview", "authorUid"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "user",
+      "description": "User profiles and permission roles"
+    },
+    "/landmarks/{landmarkId}": {
+      "schema": "landmark",
+      "description": "Publicly readable landmark records published by authorized administrators"
+    }
+  }
+}

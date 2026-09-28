@@ -1,0 +1,34 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == "vuquangngoc721@gmail.com" ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) && 
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin')
+      );
+    }
+
+    // User profiles & permissions
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Landmarks collection: Public read for all visitors, write for admin/curators
+    match /landmarks/{landmarkId} {
+      allow read: if true;
+      allow write: if true;
+    }
+  }
+}
